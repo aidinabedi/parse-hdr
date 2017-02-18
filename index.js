@@ -194,13 +194,13 @@ function parseHDR(buffer) {
             var g = data[offset+1]/255;
             var b = data[offset+2]/255;
             var e = data[offset+3];
-            var f = Math.pow(2.0, e - 128.0)
 
+            var f = Math.pow(2.0, e - 128.0)
             r *= f;
             g *= f;
             b *= f;
 
-            var floatOffset = (width - y - 1)*width + x;
+            var floatOffset = (height - y - 1)*width + x;
             floatData[floatOffset+0] = r;
             floatData[floatOffset+1] = g;
             floatData[floatOffset+2] = b;
