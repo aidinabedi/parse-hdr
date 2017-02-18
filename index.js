@@ -124,7 +124,7 @@ function readPixelsRawRLE(buffer, data, offset, fileOffset, scanline_width, num_
 }
 
 //Returns data as floats suitable for webgl, i.e. Y-axis is corrected to be webgl friendly.
-function parseHdr(buffer) {
+function parseHDR(buffer) {
     if (buffer instanceof ArrayBuffer) {
         buffer = new Uint8Array(buffer);
     }
@@ -216,4 +216,4 @@ function parseHdr(buffer) {
     }
 }
 
-module.exports = parseHdr;
+module.exports = parseHDR;
