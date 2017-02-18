@@ -1,10 +1,8 @@
-"use strict";
-
 //Code ported by Marcin Ignac (2014)
 //Based on Java implementation from
 //https://code.google.com/r/cys12345-research/source/browse/hdr/image_processor/RGBE.java?r=7d84e9fd866b24079dbe61fa0a966ce8365f5726
-var radiancePattern = "#\\?RADIANCE"
-var commentPattern = "#.*"
+var radiancePattern = "#\\?RADIANCE";
+var commentPattern = "#.*";
 var gammaPattern = "GAMMA=";
 var exposurePattern = "EXPOSURE=\\s*([0-9]*[.][0-9]*)";
 var formatPattern = "FORMAT=32-bit_rle_rgbe";
@@ -86,7 +84,7 @@ function readPixelsRawRLE(buffer, data, offset, fileOffset, scanline_width, num_
           if ((buf[0] & 0xFF) > 128) {
             /* a run of the same value */
             count = (buf[0] & 0xFF) - 128;
-            if ((count == 0) || (count > ptr_end - ptr)) {
+            if ((count === 0) || (count > ptr_end - ptr)) {
               throw new Error("Bad scanline data");
             }
             while(count-- > 0)
@@ -139,7 +137,7 @@ function parseHDR(buffer) {
         do {
             var b = buffer[fileOffset];
             if (b == NEW_LINE) {
-                ++fileOffset
+                ++fileOffset;
                 break;
             }
             buf += String.fromCharCode(b);
@@ -195,7 +193,7 @@ function parseHDR(buffer) {
             var b = data[offset+2]/255;
             var e = data[offset+3];
 
-            var f = Math.pow(2.0, e - 128.0)
+            var f = Math.pow(2.0, e - 128.0);
             r *= f;
             g *= f;
             b *= f;
@@ -213,7 +211,7 @@ function parseHDR(buffer) {
         exposure: exposure,
         gamma: gamma,
         data: floatData
-    }
+    };
 }
 
 module.exports = parseHDR;
