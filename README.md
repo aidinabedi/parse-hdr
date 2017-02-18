@@ -1,12 +1,9 @@
 # parse-hdr
 
-[![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
-
 Parses HDR (Radiance) files
 
-## Usage
 
-[![NPM](https://nodei.co/npm/parse-hdr.png)](https://www.npmjs.com/package/parse-hdr)
+## Usage
 
 #### `hdrInfo = parseHDR(buffer)`
 
@@ -18,6 +15,7 @@ Returned object properties:
 `exposure` - exposure of the image  
 `gamma` - gamma of the image  
 `data` - floating point pixel array `[R, G, B, R, G, B, ..]` of `length = width * height * 3`  
+
 
 ## Example
 
@@ -35,4 +33,4 @@ io.loadBinary(__dirname + '/garage.hdr', function (err, buffer) {
 
 ## License
 
-MIT, see [LICENSE.md](http://github.com/vorg/parse-hdr/blob/master/LICENSE.md) for details.
+MIT, see [LICENSE.md](LICENSE.md) for details.
