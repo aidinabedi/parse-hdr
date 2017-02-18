@@ -55,7 +55,7 @@ function readPixelsRawRLE(buffer, data, offset, fileOffset, scanline_width, num_
         throw new Error("Error reading bytes: expected " + rgbe.length);
       }
 
-      if ((rgbe[0] != 2)||(rgbe[1] != 2)||((rgbe[2] & 0x80) != 0)) {
+      if ((rgbe[0] !== 2)||(rgbe[1] !== 2)||((rgbe[2] & 0x80) !== 0)) {
           //this file is not run length encoded
           data[offset++] = rgbe[0];
           data[offset++] = rgbe[1];
@@ -65,11 +65,11 @@ function readPixelsRawRLE(buffer, data, offset, fileOffset, scanline_width, num_
           return;
       }
 
-      if ((((rgbe[2] & 0xFF)<<8) | (rgbe[3] & 0xFF)) != scanline_width) {
+      if ((((rgbe[2] & 0xFF)<<8) | (rgbe[3] & 0xFF)) !== scanline_width) {
         throw new Error("Wrong scanline width " + (((rgbe[2] & 0xFF)<<8) | (rgbe[3] & 0xFF)) + ", expected " + scanline_width);
       }
 
-      if (scanline_buffer == null) {
+      if (scanline_buffer === null) {
         scanline_buffer = new Array(4*scanline_width);
       }
 
@@ -93,7 +93,7 @@ function readPixelsRawRLE(buffer, data, offset, fileOffset, scanline_width, num_
           else {
             /* a non-run */
             count = buf[0] & 0xFF;
-            if ((count == 0) || (count > ptr_end - ptr)) {
+            if ((count === 0) || (count > ptr_end - ptr)) {
               throw new Error("Bad scanline data");
             }
             scanline_buffer[ptr++] = buf[1];
