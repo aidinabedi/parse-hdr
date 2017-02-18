@@ -1,3 +1,5 @@
+"use strict";
+
 //Code ported by Marcin Ignac (2014)
 //Based on Java implementation from
 //https://code.google.com/r/cys12345-research/source/browse/hdr/image_processor/RGBE.java?r=7d84e9fd866b24079dbe61fa0a966ce8365f5726
