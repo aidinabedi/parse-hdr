@@ -123,7 +123,7 @@ function readPixelsRawRLE(buffer, data, offset, fileOffset, scanline_width, num_
 
 }
 
-//Returns data as floats and flipped along Y by default
+//Returns data as floats suitable for webgl, i.e. Y-axis is corrected to be webgl friendly.
 function parseHdr(buffer) {
     if (buffer instanceof ArrayBuffer) {
         buffer = new Uint8Array(buffer);
@@ -186,23 +186,25 @@ function parseHdr(buffer) {
     //TODO: Should be Float16
     var floatData = new Float32Array(width * height * 3);
     
-    var pixelCount = width * height;
-    for(var i = 0; i < pixelCount; i += 4) {
-		var offset = i*4;
-        var r = data[offset+0]/255;
-        var g = data[offset+1]/255;
-        var b = data[offset+2]/255;
-        var e = data[offset+3];
-        var f = Math.pow(2.0, e - 128.0)
+    for (var y = 0; y < height; y++) {
+        for (var x = 0; x < width; x++) {
 
-        r *= f;
-        g *= f;
-        b *= f;
+            var offset = y*width + x;
+            var r = data[offset+0]/255;
+            var g = data[offset+1]/255;
+            var b = data[offset+2]/255;
+            var e = data[offset+3];
+            var f = Math.pow(2.0, e - 128.0)
 
-        var floatOffset = i*3;
-        floatData[floatOffset+0] = r;
-        floatData[floatOffset+1] = g;
-        floatData[floatOffset+2] = b;
+            r *= f;
+            g *= f;
+            b *= f;
+
+            var floatOffset = (width - y - 1)*width + x;
+            floatData[floatOffset+0] = r;
+            floatData[floatOffset+1] = g;
+            floatData[floatOffset+2] = b;
+        }
     }
 
     return {
