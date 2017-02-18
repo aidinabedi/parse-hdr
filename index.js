@@ -184,8 +184,11 @@ function parseHdr(buffer) {
     readPixelsRawRLE(buffer, data, 0, fileOffset, scanline_width, num_scanlines);
 
     //TODO: Should be Float16
-    var floatData = new Float32Array(width * height * 4);
-    for(var offset=0; offset<data.length; offset += 4) {
+    var floatData = new Float32Array(width * height * 3);
+    
+    var pixelCount = width * height;
+    for(var i = 0; i < pixelCount; i += 4) {
+		var offset = i*4;
         var r = data[offset+0]/255;
         var g = data[offset+1]/255;
         var b = data[offset+2]/255;
@@ -196,12 +199,10 @@ function parseHdr(buffer) {
         g *= f;
         b *= f;
 
-        var floatOffset = offset;
-
+        var floatOffset = i*3;
         floatData[floatOffset+0] = r;
         floatData[floatOffset+1] = g;
         floatData[floatOffset+2] = b;
-        floatData[floatOffset+3] = 1.0;
     }
 
     return {
