@@ -187,7 +187,7 @@ function parseHDR(buffer) {
     for (var y = 0; y < height; y++) {
         for (var x = 0; x < width; x++) {
 
-            var offset = y*width + x;
+            var offset = (y*width + x)*4;
             var r = data[offset+0]/255;
             var g = data[offset+1]/255;
             var b = data[offset+2]/255;
@@ -198,7 +198,7 @@ function parseHDR(buffer) {
             g *= f;
             b *= f;
 
-            var floatOffset = (height - y - 1)*width + x;
+            var floatOffset = ((height - y - 1)*width + x)*3;
             floatData[floatOffset+0] = r;
             floatData[floatOffset+1] = g;
             floatData[floatOffset+2] = b;
